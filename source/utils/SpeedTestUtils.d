@@ -1,5 +1,7 @@
 module source.utils.SpeedTestUtils;
 
+import utils.SpeedTestData;
+
 import std.stdio;
 import std.string;
 import std.conv;
@@ -28,7 +30,7 @@ public class SpeedTestUtils
     * Params:
     *      X    =     maximum combination length
     *      arr  =     list of characters to be used in the combinations
-    *      path =   path of the file to be written to
+    *      dat.path =   dat.path of the file to be written to
     *      output   =   name of the output file where the combinations will be stored.
     *
     * Algorithm to create every combination of a list of characters to a certian length.
@@ -60,25 +62,27 @@ public class SpeedTestUtils
     * --------------
     * Repeat X number of times, then combine all files together.
     */
-    void differentFlagPermutations(int X, string[] arr, string output = "fin.txt", string path = "C:/Users/zacha/code/python/thomasprograms/hashing/source/resorces/generatedPasswords/")
+    void differentFlagPermutations(int X, string[] arr, string output = "fin.txt")
     {
+        SpeedTestData dat = new SpeedTestData();
+
         int arr_len = to!int(arr.length);
         File file;
         File previous;
         File fin;
 
-        fin = File(path ~ output, "w");
+        fin = File(dat.path ~ output, "w");
         fin.write();
         fin.close();
 
         for (int j = 0; j < X; j++)
         {
-            file = File(path ~ to!string(j) ~ ".txt", "w");
+            file = File(dat.path ~ to!string(j) ~ ".txt", "w");
             if (j == 0)
             {
                 for (int i = 0; i < arr_len; i++)
                 {
-                    fin = File(path ~ output, "a+");
+                    fin = File(dat.path ~ output, "a+");
                     file.write(arr[i] ~ "\n");
                     fin.write(arr[i] ~ "\n");
                     fin.close();
@@ -88,9 +92,9 @@ public class SpeedTestUtils
             {
                 for (int i = 0; i < arr_len; i++)
                 {
-                    file = File(path ~ to!string(j) ~ ".txt", "a+");
-                    previous = File(path ~ to!string(j - 1) ~ ".txt", "r");
-                    fin = File(path ~ output, "a+");
+                    file = File(dat.path ~ to!string(j) ~ ".txt", "a+");
+                    previous = File(dat.path ~ to!string(j - 1) ~ ".txt", "r");
+                    fin = File(dat.path ~ output, "a+");
                     foreach (line; previous.byLine())
                     {
                         file.write(line ~ arr[i] ~ "\n");
@@ -106,7 +110,7 @@ public class SpeedTestUtils
         // Cleanup
         for (int j = 0; j < X; j++)
         {
-            remove(path ~ to!string(j) ~ ".txt");
+            remove(dat.path ~ to!string(j) ~ ".txt");
         }
     }
 

@@ -13,11 +13,12 @@ import utils.SpeedTestData;
 public class SpeedTest
 {
 
-    public int test(string[] arr, string filename, string path = "C:/Users/zacha/code/python/thomasprograms/hashing/source/resorces/generatedPasswords/")
+    public int test(string[] arr, string filename)
     {
 
         SpeedTestUtils uti = new SpeedTestUtils();
         SpeedTestData dat = new SpeedTestData();
+
 
         ubyte[32][] rand_hashed;
         for (int x = 0; x < dat.rand_comb_amount; x++)
@@ -30,7 +31,7 @@ public class SpeedTest
         bool found = false;
         ubyte[32] found_pass;
 
-        File combinations = File(path ~ filename, "r");
+        File combinations = File(dat.path ~ filename, "r");
 
         sw.start();
 
@@ -47,7 +48,7 @@ public class SpeedTest
                 }
             }
             combinations.close();
-            combinations = File(path ~ filename, "r");
+            combinations = File(dat.path ~ filename, "r");
             if (!found)
             {
                 writeln("Not found: " ~ to!string(m));
