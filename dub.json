@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"zachary"
+	],
+	"copyright": "Copyright © 2022, zachary",
+	"description": "A D application to test the strength of different passwords.",
+	"license": "proprietary",
+	"name": "speed_test"
+}
