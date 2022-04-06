@@ -2,12 +2,13 @@ import matplotlib.pyplot as plt
 import ast
 
 from numpy import average
-from MathFuncs import MathFuncs as fun
+import MathFuncs
 
 # Data from the SpeedTest program.
 # (SET)_time = the average times of 5 tests.
 # (SET)_x = the amount of characters
 
+fun = MathFuncs.MathFuncs()
 
 colors = ["bo", "go", "ro", "co", "mo"]
 charlen = [10, 14, 26, 52, 62, 66, 76]
@@ -24,24 +25,35 @@ for a in arrs:
         plt.plot(charlen, a[b], colors[b])
 
 averages_y = []
+medians_y = []
+
+mean_tmp2 = []
+median_tmp2 = []
 tmp = []
-tmp2 = []
+
 for x in range(0, len(arrs[0][0])):
     for a in arrs:
         for b in a:
             tmp.append(b[x])
         if tmp != []:
             try:
-                tmp2[x].append(fun.mean(tmp))
+                mean_tmp2[x].append(fun.mean(tmp))
+                median_tmp2[x].append(fun.median(tmp))
             except IndexError:
-                tmp2.append([])
-                tmp2[x].append(fun.mean(tmp))
+                mean_tmp2.append([])
+                mean_tmp2[x].append(fun.mean(tmp))
+                median_tmp2.append([])
+                median_tmp2[x].append(fun.median(tmp))
         tmp = []
 
-for a in tmp2:
+for a in mean_tmp2:
     averages_y.append(fun.mean(a))
 
+for a in median_tmp2:
+    medians_y.append(fun.median(a))
+
 plt.plot(charlen, averages_y, "g--")
+plt.plot(charlen, medians_y, "g--")
 
 plt.title('Character set VS time to crack a password')
 plt.xlabel('Number of Characters')
