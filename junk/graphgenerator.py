@@ -10,12 +10,13 @@ import MathFuncs
 
 fun = MathFuncs.MathFuncs()
 
+path = "./source/resorces/output/"
 colors = ["bo", "go", "ro", "co", "mo"]
 charlen = [10, 14, 26, 52, 62, 66, 76]
 
 y_set = []
 
-with open ("./source/resorces/output/output.txt", "r") as f:
+with open (path + "output.txt", "r") as f:
     arrs = f.read().split("\n")
     for x in range(0, len(arrs)-1):
         arrs[x] = ast.literal_eval(arrs[x])
@@ -52,6 +53,9 @@ for a in mean_tmp2:
 for a in median_tmp2:
     medians_y.append(fun.median(a))
 
+print(averages_y)
+print(medians_y)
+
 plt.plot(charlen, averages_y, "g--")
 plt.plot(charlen, medians_y, "g--")
 
@@ -59,4 +63,5 @@ plt.title('Character set VS time to crack a password')
 plt.xlabel('Number of Characters')
 plt.ylabel('Time (ms)')
 
+#plt.savefig(path + "output.png")
 plt.show()
