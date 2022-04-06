@@ -12,7 +12,7 @@ import core.thread;
 import std.digest.sha;
 import std.file;
 
-public class SpeedTestUtils
+public static class SpeedTestUtils
 {
     /** 
      * Get the current time in microseconds. Used for generating pseudo-random passwords.
@@ -62,7 +62,7 @@ public class SpeedTestUtils
     * --------------
     * Repeat X number of times, then combine all files together.
     */
-    void differentFlagPermutations(int X, string[] arr, string output = "fin.txt")
+    public static void differentFlagPermutations(int X, string[] arr, string output = "fin.txt")
     {
         SpeedTestData dat = new SpeedTestData();
 
@@ -122,7 +122,7 @@ public class SpeedTestUtils
      *   characters = the list of characters to be used in the password
      * Returns: A random password of length leng
      */
-    string generateRandomPassword(int leng, string[] characters)
+    public string generateRandomPassword(int leng, string[] characters)
     {
         string pass;
         Random rnd;

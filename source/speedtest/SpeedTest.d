@@ -10,7 +10,7 @@ import std.file;
 import source.utils.speedtestutils;
 import utils.speedtestdata;
 
-public class SpeedTest
+public static class SpeedTest
 {
     /** 
      * 
@@ -19,7 +19,7 @@ public class SpeedTest
      *   filename = the filename of the generated passwords.
      * Returns: A list of average times to crack a random combination.
      */
-    public int test(string[] arr, string filename)
+    public static int test(string[] arr, string filename)
     {
 
         SpeedTestUtils uti = new SpeedTestUtils();
