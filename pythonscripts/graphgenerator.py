@@ -10,13 +10,14 @@ import MathFuncs
 
 fun = MathFuncs.MathFuncs()
 
-path = "./source/resorces/output/"
+d_output_path = "./source/output/"
+py_output_path = "./pythonscripts/output/"
 colors = ["bo", "go", "ro", "co", "mo"]
 charlen = [10, 14, 26, 52, 62, 66, 76]
 
 y_set = []
 
-with open (path + "output.txt", "r") as f:
+with open (d_output_path + "output.txt", "r") as f:
     arrs = f.read().split("\n")
     for x in range(0, len(arrs)-1):
         arrs[x] = ast.literal_eval(arrs[x])
@@ -63,5 +64,5 @@ plt.title('Character set VS time to crack a password')
 plt.xlabel('Number of Characters')
 plt.ylabel('Time (ms)')
 
-#plt.savefig(path + "output.png")
+plt.savefig(py_output_path + "output.png")
 plt.show()

@@ -13,4 +13,7 @@ speed_test-test-*
 *.o
 *.obj
 *.lst
-*.txt
+*.pyc
+
+# Too much data to push into github
+/source/resources/generatedPasswords/

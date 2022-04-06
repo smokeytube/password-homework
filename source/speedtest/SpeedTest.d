@@ -12,7 +12,13 @@ import utils.SpeedTestData;
 
 public class SpeedTest
 {
-
+    /** 
+     * 
+     * Params:
+     *   arr = the list of characters to use. It should correspond to filename.
+     *   filename = the filename of the generated passwords.
+     * Returns: A list of average times to crack a random combination.
+     */
     public int test(string[] arr, string filename)
     {
 
@@ -31,7 +37,7 @@ public class SpeedTest
         bool found = false;
         ubyte[32] found_pass;
 
-        File combinations = File(dat.path ~ filename, "r");
+        File combinations = File(dat.d_generated_path ~ filename, "r");
 
         sw.start();
 
@@ -48,12 +54,10 @@ public class SpeedTest
                 }
             }
             combinations.close();
-            combinations = File(dat.path ~ filename, "r");
+            combinations = File(dat.d_generated_path ~ filename, "r");
             if (!found)
             {
                 writeln("Not found: " ~ to!string(m));
-            } else {
-                // writeln("Found: " ~ (to!string(m)));
             }
 
             found = false;

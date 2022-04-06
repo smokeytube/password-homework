@@ -30,13 +30,13 @@ public class SpeedTestUtils
     * Params:
     *      X    =     maximum combination length
     *      arr  =     list of characters to be used in the combinations
-    *      dat.path =   dat.path of the file to be written to
+    *      dat.d_output_path =   dat.d_output_path of the file to be written to
     *      output   =   name of the output file where the combinations will be stored.
     *
     * Algorithm to create every combination of a list of characters to a certian length.
     * This is not handled in-memory for two reasons:
     * 1. The program will run out of memory quickly for combination lengths longer than 3 or 4
-    * 2. The program will have to freshly generate the combinations every time the program runs, wasting a lot of time and resorces.
+    * 2. The program will have to freshly generate the combinations every time the program runs, wasting a lot of time and resources.
     *
     * Take the last file, repeat the contents by integer X times, then append another character to the end of it, creating a new combination
     *
@@ -71,18 +71,18 @@ public class SpeedTestUtils
         File previous;
         File fin;
 
-        fin = File(dat.path ~ output, "w");
+        fin = File(dat.d_output_path ~ output, "w");
         fin.write();
         fin.close();
 
         for (int j = 0; j < X; j++)
         {
-            file = File(dat.path ~ to!string(j) ~ ".txt", "w");
+            file = File(dat.d_output_path ~ to!string(j) ~ ".txt", "w");
             if (j == 0)
             {
                 for (int i = 0; i < arr_len; i++)
                 {
-                    fin = File(dat.path ~ output, "a+");
+                    fin = File(dat.d_output_path ~ output, "a+");
                     file.write(arr[i] ~ "\n");
                     fin.write(arr[i] ~ "\n");
                     fin.close();
@@ -92,9 +92,9 @@ public class SpeedTestUtils
             {
                 for (int i = 0; i < arr_len; i++)
                 {
-                    file = File(dat.path ~ to!string(j) ~ ".txt", "a+");
-                    previous = File(dat.path ~ to!string(j - 1) ~ ".txt", "r");
-                    fin = File(dat.path ~ output, "a+");
+                    file = File(dat.d_output_path ~ to!string(j) ~ ".txt", "a+");
+                    previous = File(dat.d_output_path ~ to!string(j - 1) ~ ".txt", "r");
+                    fin = File(dat.d_output_path ~ output, "a+");
                     foreach (line; previous.byLine())
                     {
                         file.write(line ~ arr[i] ~ "\n");
@@ -110,7 +110,7 @@ public class SpeedTestUtils
         // Cleanup
         for (int j = 0; j < X; j++)
         {
-            remove(dat.path ~ to!string(j) ~ ".txt");
+            remove(dat.d_output_path ~ to!string(j) ~ ".txt");
         }
     }
 
@@ -125,7 +125,6 @@ public class SpeedTestUtils
     string generateRandomPassword(int leng, string[] characters)
     {
         string pass;
-        string[] charlist;
         Random rnd;
 
         for (int x = 0; x < leng; x++)

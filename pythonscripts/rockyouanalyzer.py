@@ -1,4 +1,6 @@
-# Find most used characters, least used characters, and most used passwords
+# Find most used characters, least used characters
+
+path = "./pythonscripts/resources/txt/"
 
 character_dictionary = {
     'a': 0,
@@ -79,7 +81,7 @@ character_dictionary = {
     '+': 0,
 }
 
-with open("rockyou10000.txt", "r") as f:
+with open(path + "rockyou10000.txt", "r") as f:
     for line in f:
         for char in line:
             try:

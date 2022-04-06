@@ -5,7 +5,10 @@ public class SpeedTestData
     public int comb_len = 4;
     public int rand_comb_amount = 10;
 
-    string path = "./source/resorces/output/";
+    string d_output_path = "./source/output/";
+    string d_generated_path = "./source/resources/generatedPasswords/";
+
+    string py_output_path = "./pythonscripts/output/";
 
     public string[] lowercase = [
         "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",

@@ -1,6 +1,7 @@
 import std.stdio;
 import std.digest.sha;
 import std.conv;
+import std.process;
 
 import source.utils.SpeedTestUtils;
 import utils.SpeedTestData;
@@ -92,9 +93,20 @@ void main()
 	writeln(lowercase_uppercase_numbers_symbols);
 
 
+	int[][] all = [
+		numbers,
+		symbols,
+		lowercase,
+		lowercase_uppercase,
+		lowercase_uppercase_numbers,
+		lowercase_uppercase_symbols,
+		lowercase_uppercase_numbers_symbols
+	];
+
 	int[][] all_sorted = [];
 	int[] sorted;
 
+	// Algorithm to sort 7 lists of 5 numbers to 5 lists of 7 numbers
 	for (int i = 0; i < all[0].length; i++)
 	{
 		sorted = [];
@@ -106,8 +118,10 @@ void main()
 		sorted = [];
 	}
 
-	File output = File(dat.path ~ "output.txt", "a+");
+	File output = File(dat.d_output_path ~ "output.txt", "a+");
 	output.write(all_sorted);
 	output.write("\n");
 	output.close();
+
+	auto dmd = execute(["python", "./pythonscripts/graphgenerator.py"]);
 }
