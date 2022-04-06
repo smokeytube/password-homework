@@ -1,4 +1,4 @@
-module speedtest.SpeedTest;
+module speedtest.speedtest;
 
 import std.datetime.stopwatch;
 import std.stdio;
@@ -7,8 +7,8 @@ import std.conv;
 import std.string;
 import std.file;
 
-import source.utils.SpeedTestUtils;
-import utils.SpeedTestData;
+import source.utils.speedtestutils;
+import utils.speedtestdata;
 
 public class SpeedTest
 {

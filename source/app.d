@@ -3,9 +3,9 @@ import std.digest.sha;
 import std.conv;
 import std.process;
 
-import source.utils.SpeedTestUtils;
-import utils.SpeedTestData;
-import speedtest.SpeedTest;
+import source.utils.speedtestutils;
+import utils.speedtestdata;
+import speedtest.speedtest;
 
 void main()
 {

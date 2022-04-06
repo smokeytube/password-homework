@@ -1,4 +1,4 @@
-module utils.SpeedTestData;
+module utils.speedtestdata;
 
 public class SpeedTestData
 {

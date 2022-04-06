@@ -1,6 +1,6 @@
-module source.utils.SpeedTestUtils;
+module source.utils.speedtestutils;
 
-import utils.SpeedTestData;
+import utils.speedtestdata;
 
 import std.stdio;
 import std.string;
