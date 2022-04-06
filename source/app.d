@@ -16,26 +16,28 @@ void main()
 	bool generate_passwords = false;
 	int rep = 5;
 
+	string[][string] d = dat.charDictionary();
+
 	if (generate_passwords)
 	{
 		// Generate all combinations
-		uti.differentFlagPermutations(dat.comb_len, dat.numbers, "numbers.txt");
-		uti.differentFlagPermutations(dat.comb_len, dat.symbols, "symbols.txt");
-		uti.differentFlagPermutations(dat.comb_len, dat.lowercase, "lowercase.txt");
+		uti.differentFlagPermutations(dat.comb_len, d["numbers"], "numbers.txt");
+		uti.differentFlagPermutations(dat.comb_len, d["symbols"], "symbols.txt");
+		uti.differentFlagPermutations(dat.comb_len, d["lowercase"], "lowercase.txt");
 		uti.differentFlagPermutations(dat.comb_len, (
-				dat.lowercase ~ dat.uppercase), "lowercase_uppercase.txt");
+				d["lowercase"] ~ d["uppercase"]), "lowercase_uppercase.txt");
 		uti.differentFlagPermutations(dat.comb_len, (
-				dat.lowercase ~ dat.uppercase ~ dat.numbers), "lowercase_uppercase_numbers.txt");
+				d["lowercase"] ~ d["uppercase"] ~ d["numbers"]), "lowercase_uppercase_numbers.txt");
 		uti.differentFlagPermutations(dat.comb_len, (
-				dat.lowercase ~ dat.uppercase ~ dat.symbols), "lowercase_uppercase_symbols.txt");
+				d["lowercase"] ~ d["uppercase"] ~ d["symbols"]), "lowercase_uppercase_symbols.txt");
 		uti.differentFlagPermutations(dat.comb_len, (
-				dat.lowercase ~ dat.uppercase ~ dat.numbers ~ dat.symbols), "lowercase_uppercase_numbers_symbols.txt");
+				d["lowercase"] ~ d["uppercase"] ~ d["numbers"] ~ d["symbols"]), "lowercase_uppercase_numbers_symbols.txt");
 	}
 
 	int[] numbers;
 	for (int x = 0; x < rep; x++)
 	{
-		numbers ~= tes.test(dat.numbers, "numbers.txt");
+		numbers ~= tes.test(d["numbers"], "numbers.txt");
 	}
 
 	writeln(numbers);
@@ -43,7 +45,7 @@ void main()
 	int[] symbols;
 	for (int x = 0; x < rep; x++)
 	{
-		symbols ~= tes.test(dat.symbols, "symbols.txt");
+		symbols ~= tes.test(d["symbols"], "symbols.txt");
 	}
 
 	writeln(symbols);
@@ -51,7 +53,7 @@ void main()
 	int[] lowercase;
 	for (int x = 0; x < rep; x++)
 	{
-		lowercase ~= tes.test(dat.lowercase, "lowercase.txt");
+		lowercase ~= tes.test(d["lowercase"], "lowercase.txt");
 	}
 
 	writeln(lowercase);
@@ -60,7 +62,7 @@ void main()
 	for (int x = 0; x < rep; x++)
 	{
 		lowercase_uppercase ~= tes.test((
-				dat.lowercase ~ dat.uppercase), "lowercase_uppercase.txt");
+				d["lowercase"] ~ d["uppercase"]), "lowercase_uppercase.txt");
 	}
 
 	writeln(lowercase_uppercase);
@@ -69,7 +71,7 @@ void main()
 	for (int x = 0; x < rep; x++)
 	{
 		lowercase_uppercase_numbers ~= tes.test((
-				dat.lowercase ~ dat.uppercase ~ dat.numbers), "lowercase_uppercase_numbers.txt");
+				d["lowercase"] ~ d["uppercase"] ~ d["numbers"]), "lowercase_uppercase_numbers.txt");
 	}
 
 	writeln(lowercase_uppercase_numbers);
@@ -78,7 +80,7 @@ void main()
 	for (int x = 0; x < rep; x++)
 	{
 		lowercase_uppercase_symbols ~= tes.test((
-				dat.lowercase ~ dat.uppercase ~ dat.symbols), "lowercase_uppercase_symbols.txt");
+				d["lowercase"] ~ d["uppercase"] ~ d["symbols"]), "lowercase_uppercase_symbols.txt");
 	}
 
 	writeln(lowercase_uppercase_symbols);
@@ -87,7 +89,7 @@ void main()
 	for (int x = 0; x < rep; x++)
 	{
 		lowercase_uppercase_numbers_symbols ~= tes.test((
-				dat.lowercase ~ dat.uppercase ~ dat.numbers ~ dat.symbols), "lowercase_uppercase_numbers_symbols.txt");
+				d["lowercase"] ~ d["uppercase"] ~ d["numbers"] ~ d["symbols"]), "lowercase_uppercase_numbers_symbols.txt");
 	}
 
 	writeln(lowercase_uppercase_numbers_symbols);
