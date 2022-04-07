@@ -17,93 +17,27 @@ void main()
 	int rep = 5;
 
 	string[][string] d = dat.charDictionary();
+	int[][string] o = dat.outputMap();
 
 	if (generate_passwords)
 	{
-		// Generate all combinations
-		uti.differentFlagPermutations(dat.comb_len, d["numbers"], "numbers.txt");
-		uti.differentFlagPermutations(dat.comb_len, d["symbols"], "symbols.txt");
-		uti.differentFlagPermutations(dat.comb_len, d["lowercase"], "lowercase.txt");
-		uti.differentFlagPermutations(dat.comb_len, (
-				d["lowercase"] ~ d["uppercase"]), "lowercase_uppercase.txt");
-		uti.differentFlagPermutations(dat.comb_len, (
-				d["lowercase"] ~ d["uppercase"] ~ d["numbers"]), "lowercase_uppercase_numbers.txt");
-		uti.differentFlagPermutations(dat.comb_len, (
-				d["lowercase"] ~ d["uppercase"] ~ d["symbols"]), "lowercase_uppercase_symbols.txt");
-		uti.differentFlagPermutations(dat.comb_len, (
-				d["lowercase"] ~ d["uppercase"] ~ d["numbers"] ~ d["symbols"]), "lowercase_uppercase_numbers_symbols.txt");
+		foreach(item; d.byKeyValue()) {
+            uti.differentFlagPermutations(dat.comb_len, d[item.key], item.key ~ ".txt");
+        }
 	}
 
-	int[] numbers;
-	for (int x = 0; x < rep; x++)
+	foreach (item; d.byKeyValue())
 	{
-		numbers ~= tes.test(d["numbers"], "numbers.txt");
+		for (int i = 0; i < rep; i++) {
+			o[item.key] ~= tes.test(d[item.key], item.key ~ ".txt");
+		}
 	}
 
-	writeln(numbers);
+	int[][] all;
 
-	int[] symbols;
-	for (int x = 0; x < rep; x++)
-	{
-		symbols ~= tes.test(d["symbols"], "symbols.txt");
+	foreach (item; o.byKeyValue()) {
+		all ~= item.value;
 	}
-
-	writeln(symbols);
-
-	int[] lowercase;
-	for (int x = 0; x < rep; x++)
-	{
-		lowercase ~= tes.test(d["lowercase"], "lowercase.txt");
-	}
-
-	writeln(lowercase);
-
-	int[] lowercase_uppercase;
-	for (int x = 0; x < rep; x++)
-	{
-		lowercase_uppercase ~= tes.test((
-				d["lowercase"] ~ d["uppercase"]), "lowercase_uppercase.txt");
-	}
-
-	writeln(lowercase_uppercase);
-
-	int[] lowercase_uppercase_numbers;
-	for (int x = 0; x < rep; x++)
-	{
-		lowercase_uppercase_numbers ~= tes.test((
-				d["lowercase"] ~ d["uppercase"] ~ d["numbers"]), "lowercase_uppercase_numbers.txt");
-	}
-
-	writeln(lowercase_uppercase_numbers);
-
-	int[] lowercase_uppercase_symbols;
-	for (int x = 0; x < rep; x++)
-	{
-		lowercase_uppercase_symbols ~= tes.test((
-				d["lowercase"] ~ d["uppercase"] ~ d["symbols"]), "lowercase_uppercase_symbols.txt");
-	}
-
-	writeln(lowercase_uppercase_symbols);
-
-	int[] lowercase_uppercase_numbers_symbols;
-	for (int x = 0; x < rep; x++)
-	{
-		lowercase_uppercase_numbers_symbols ~= tes.test((
-				d["lowercase"] ~ d["uppercase"] ~ d["numbers"] ~ d["symbols"]), "lowercase_uppercase_numbers_symbols.txt");
-	}
-
-	writeln(lowercase_uppercase_numbers_symbols);
-
-
-	int[][] all = [
-		numbers,
-		symbols,
-		lowercase,
-		lowercase_uppercase,
-		lowercase_uppercase_numbers,
-		lowercase_uppercase_symbols,
-		lowercase_uppercase_numbers_symbols
-	];
 
 	int[][] all_sorted = [];
 	int[] sorted;
@@ -125,5 +59,5 @@ void main()
 	output.write("\n");
 	output.close();
 
-	auto dmd = execute(["python", "./pythonscripts/graphgenerator.py"]);
+	execute(["python", "./pythonscripts/graphgenerator.py"]);
 }
