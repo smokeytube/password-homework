@@ -18,7 +18,7 @@ public static class SpeedTestUtils
      * Get the current time in microseconds. Used for generating pseudo-random passwords.
      * Returns: current time in usecs
      */
-    public static int currentUsecs()
+    protected static int currentUsecs()
     {
         SysTime currentTime = Clock.currTime();
         auto frac = currentTime.fracSecs();

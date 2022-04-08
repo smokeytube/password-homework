@@ -7,13 +7,13 @@ public static class SpeedTestData
     public int comb_len = 4;
     public int rand_comb_amount = 10;
 
-    string d_output_path = "./source/output/";
-    string d_generated_path = "./source/resources/generatedPasswords/";
+    public string d_output_path = "./source/output/";
+    public string d_generated_path = "./source/resources/generatedPasswords/";
 
-    string py_output_path = "./pythonscripts/output/";
+    public string py_output_path = "./pythonscripts/output/";
 
     // This dictionary cannot be a class instance variable because it is disallowed in dlang for some reason
-    static string[][string] charDictionary()
+    public static string[][string] charDictionary()
     {
         return [
             "numbers": [
@@ -58,7 +58,7 @@ public static class SpeedTestData
         ];
     }
 
-    int[][string] outputMap()
+    public int[][string] outputMap()
     {
         string[][string] dict = this.charDictionary();
 
