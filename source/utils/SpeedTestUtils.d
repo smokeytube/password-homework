@@ -14,23 +14,10 @@ import std.file;
 
 public static class SpeedTestUtils
 {
-    /** 
-     * Get the current time in microseconds. Used for generating pseudo-random passwords.
-     * Returns: current time in usecs
-     */
-    protected static int currentUsecs()
-    {
-        SysTime currentTime = Clock.currTime();
-        auto frac = currentTime.fracSecs();
-        immutable usec = cast(int) frac.total!"usecs";
-        return usec;
-    }
-
     /*
     * Params:
     *      X    =     maximum combination length
     *      arr  =     list of characters to be used in the combinations
-    *      dat.d_output_path =   dat.d_output_path of the file to be written to
     *      output   =   name of the output file where the combinations will be stored.
     *
     * Algorithm to create every combination of a list of characters to a certian length.
@@ -71,18 +58,18 @@ public static class SpeedTestUtils
         File previous;
         File fin;
 
-        fin = File(dat.d_output_path ~ output, "w");
+        fin = File(dat.d_generated_path ~ output, "w");
         fin.write();
         fin.close();
 
         for (int j = 0; j < X; j++)
         {
-            file = File(dat.d_output_path ~ to!string(j) ~ ".txt", "w");
+            file = File(dat.d_generated_path ~ to!string(j) ~ ".txt", "w");
             if (j == 0)
             {
                 for (int i = 0; i < arr_len; i++)
                 {
-                    fin = File(dat.d_output_path ~ output, "a+");
+                    fin = File(dat.d_generated_path ~ output, "a+");
                     file.write(arr[i] ~ "\n");
                     fin.write(arr[i] ~ "\n");
                     fin.close();
@@ -92,9 +79,9 @@ public static class SpeedTestUtils
             {
                 for (int i = 0; i < arr_len; i++)
                 {
-                    file = File(dat.d_output_path ~ to!string(j) ~ ".txt", "a+");
-                    previous = File(dat.d_output_path ~ to!string(j - 1) ~ ".txt", "r");
-                    fin = File(dat.d_output_path ~ output, "a+");
+                    file = File(dat.d_generated_path ~ to!string(j) ~ ".txt", "a+");
+                    previous = File(dat.d_generated_path ~ to!string(j - 1) ~ ".txt", "r");
+                    fin = File(dat.d_generated_path ~ output, "a+");
                     foreach (line; previous.byLine())
                     {
                         file.write(line ~ arr[i] ~ "\n");
@@ -110,7 +97,7 @@ public static class SpeedTestUtils
         // Cleanup
         for (int j = 0; j < X; j++)
         {
-            remove(dat.d_output_path ~ to!string(j) ~ ".txt");
+            remove(dat.d_generated_path ~ to!string(j) ~ ".txt");
         }
     }
 
@@ -125,13 +112,14 @@ public static class SpeedTestUtils
     public string generateRandomPassword(int leng, string[] characters)
     {
         string pass;
-        Random rnd;
+        int rnd;
+
+        int arrlen = to!int(characters.length);
 
         for (int x = 0; x < leng; x++)
         {
-            rnd = Random(currentUsecs());
-            Thread.sleep(dur!("usecs")(uniform(0, 1000, rnd)));
-            pass ~= characters.choice(rnd);
+            rnd = uniform(0, arrlen);
+            pass ~= characters[rnd];
 
         }
         return pass;
