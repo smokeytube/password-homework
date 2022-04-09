@@ -12,7 +12,7 @@ fun = MathFuncs.MathFuncs()
 
 d_output_path = "./source/output/"
 py_output_path = "./pythonscripts/output/"
-colors = ["bo", "go", "ro", "co", "mo"]
+colors = ["bo", "go", "ro", "co", "mo", "yo", "ko", "b^", "g^", "r^", "c^", "m^", "y^", "k^", "b*", "g*", "r*", "c*", "m*", "y*", "k*", "b+", "g+", "r+", "c+", "m+", "y+", "k+", "bx", "gx", "rx", "cx", "mx", "yx", "kx", "b.", "g.", "r.", "c.", "m.", "y.", "k.", "b,", "g,", "r,", "c,", "m,", "y,", "k,"]
 charlen = [10, 14, 26, 52, 62, 66, 76]
 
 y_set = []
